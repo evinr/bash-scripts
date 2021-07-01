@@ -7,4 +7,4 @@
 # errors: ~/.xsession-errors
 # to run each new terminal: /etc/bash.bashrc or .bashrc
 
-wget $(curl https://api.nasa.gov/planetary/apod?api_key=KCwc2fhxKyvxFQbjxdxcuSvVSM3wJHDXaQcvII2N -H "Accept: application/json" -i | grep -oP 'https://.*?\.jpg' | head -n1) --output-document=/home/heaven/lock-background.jpg 
+wget $(curl https://api.nasa.gov/planetary/apod?api_key=<your-api-key> -H "Accept: application/json" -i | grep -oP 'https://.*?\.jpg' | head -n1) --output-document=/home/<your-user-name>/lock-background.jpg 
