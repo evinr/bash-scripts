@@ -16,14 +16,14 @@
 # Open this file  /usr/share/gnome-shell/theme/ubuntu.css  
 
 # to change the lock screen, edit these lines: #lockDialogGroup {
-#  background: #2c001e url(file:////home/<user-name>/lock-background.jpg);
+#  background: #2c001e url(file:////home/<user-name>/Pictures/lock-background.jpg);
 #  background-repeat: no-repeat;
 #  background-size: cover;
 #  background-position: center; }
 
 # To change the background: 
-# gsettings set org.gnome.desktop.background picture-uri "/home/<your-user-name>/lock-background.jpg"
+# gsettings set org.gnome.desktop.background picture-uri "/home/<your-user-name>/Pictures/lock-background.jpg"
 
+# Or go into your settings and get it all worked out in some combination
 
-
-wget $(curl https://api.nasa.gov/planetary/apod?api_key=<your-api-key> -H "Accept: application/json" -i | grep -oP 'https://.*?\.jpg' | head -n1) --output-document=/home/<your-user-name>/lock-background.jpg 
+wget $(curl https://api.nasa.gov/planetary/apod?api_key=<your-api-key> -H "Accept: application/json" -is | grep -oP 'https://.*?\.jpg' | head -n1) --output-document=/home/<your-user-name>/Pictures/lock-background.jpg 2>/dev/null
