@@ -5,12 +5,18 @@
 # wget $(curl https://api.nasa.gov/planetary/apod?api_key=$NASA_API_KEY -H "Accept: application/json" -is | grep -oP 'https://.*?\.jpg' | head -n1) --output-document=/usr/share/backgrounds/APOD.jpg 2>/dev/null
 # not every user will implement the API and it is not needed since the URL is publically accessible
 
+# when scraping the actual site we sometimes will get a bulky iframe
+    # when no img and an iframe is detected
+        # curl the iframe url
+            # find the img tag
+    # at the least do not let the .jpg get over written
+
 touch /etc/network/if-up.d/NASA_APOD_scrapper
-echo "wget $(echo "https://apod.nasa.gov/apod/""$(curl https://apod.nasa.gov/apod/astropix.html -is | grep -oP '.*?\.jpg' | head -n1 | sed 's/<a href="//' | tr -d ' ')") --output-document=/usr/share/backgrounds/APOD.jpg 2>/dev/null" > /etc/network/if-up.d/NASA_APOD_scrapper
+echo "wget $(echo "https://apod.nasa.gov/apod/""$(curl https://apod.nasa.gov/apod/astropix.html -is | grep -oP 'image.*?\.jpg' | head -n1 | sed 's/<a href="//' | tr -d ' ')") --output-document=/usr/share/backgrounds/APOD.jpg 2>/dev/null" > /etc/network/if-up.d/NASA_APOD_scrapper
 chmod +x /etc/network/if-up.d/NASA_APOD_scrapper
 
 #download todays image 
-wget $(echo "https://apod.nasa.gov/apod/""$(curl https://apod.nasa.gov/apod/astropix.html -is | grep -oP '.*?\.jpg' | head -n1 | sed 's/<a href="//' | tr -d ' ')") --output-document=/usr/share/backgrounds/APOD.jpg 2>/dev/null
+wget $(echo "https://apod.nasa.gov/apod/""$(curl https://apod.nasa.gov/apod/astropix.html -is | grep -oP 'image.*?\.jpg' | head -n1 | sed 's/<a href="//' | tr -d ' ')") --output-document=/usr/share/backgrounds/APOD.jpg 2>/dev/null
 
 # To make the APOD a selectable background: /usr/share/gnome-background-properties/ubuntu-wallpapers.xml
 
